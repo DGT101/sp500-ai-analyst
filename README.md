@@ -1,6 +1,6 @@
 # 📈 S&P 500 AI Analyst & Advisor
 
-[![Code Quality CI](https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO/actions/workflows/linter.yml/badge.svg)](https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO/actions)
+[![Code Quality CI](https://github.com/DGT101/sp500-ai-analyst/actions/workflows/linter.yml/badge.svg)](https://github.com/DGT101/sp500-ai-analyst/actions)
 ![Python Version](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Docker Supported](https://img.shields.io/badge/docker-supported-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
