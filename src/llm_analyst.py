@@ -48,7 +48,7 @@ def build_analysis_prompt(
     - Setor: {fundamental_metrics.get('sector')}
     - Múltiplo P/L (Preço/Lucro): {fundamental_metrics.get('pe_ratio')}
     - Preço/Valor Patrimonial (P/VP): {fundamental_metrics.get('price_to_book')}
-    - Dividend Yield Histórico: {fundamental_metrics.get('dividend_yield'):.2f}%
+    - Dividend Yield Histórico: {fundamental_metrics.get('dividend_yield') or 0.0:.2f}%
 
     [DIRETRIZES DE SAÍDA]
     Gere um relatório macro dividido estritamente nos seguintes tópicos (use markdown para formatação):

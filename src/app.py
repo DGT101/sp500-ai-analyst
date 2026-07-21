@@ -117,7 +117,7 @@ if submit_button:
                     )
                     metric_col2.metric("RSI (14)", f"{tech_dict['RSI']:.1f}")
                     metric_col3.metric(
-                        "Div. Yield", f"{fundamentals.get('dividend_yield', 0):.2f}%"
+                        "Div. Yield", f"{fundamentals.get('dividend_yield') or 0.0:.2f}%"
                     )
 
                     # Gráfico Candlestick Interativo com Plotly
