@@ -5,8 +5,19 @@ from openai import OpenAI
 # O SDK da OpenAI aceita esse redirecionamento de forma nativa através da base_url.
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=os.getenv("GROQ_API_KEY"),  # Usando a variável de ambiente correta
+    api_key=os.getenv("GROQ_API_KEY") or "NOT_SET",
 )
+
+
+def escape_markdown_dollars(text: str) -> str:
+    """Substitui cifrões ($) pela entidade HTML &#36; para evitar que o Streamlit
+
+    interprete valores monetários como fórmulas LaTeX/KaTeX ou blocos de código.
+    """
+    if not text:
+        return ""
+    return text.replace("$", "&#36;")
+
 
 def build_analysis_prompt(
     ticker: str,
@@ -48,6 +59,7 @@ def build_analysis_prompt(
     """
     return prompt
 
+
 def generate_financial_report(
     ticker: str,
     target_date: str,
@@ -75,14 +87,21 @@ def generate_financial_report(
             ],
             temperature=0.2,  # Mantido baixo para evitar alucinações matemáticas
         )
-        return response.choices[0].message.content
+        report = response.choices[0].message.content
+        return escape_markdown_dollars(report)
     except Exception as e:
         return f"Erro ao acionar o analista de IA na Groq: {e}"
+
 
 # --- Bloco de Teste Executável ---
 if __name__ == "__main__":
     # Dados fictícios simulando o output do passo 1 para teste
-    exemplo_tecnico = {"Close": 180.20, "SMA_50": 175.10, "SMA_200": 162.00, "RSI": 45.2}
+    exemplo_tecnico = {
+        "Close": 180.20,
+        "SMA_50": 175.10,
+        "SMA_200": 162.00,
+        "RSI": 45.2,
+    }
 
     exemplo_fundamental = {
         "company_name": "Microsoft Corp.",

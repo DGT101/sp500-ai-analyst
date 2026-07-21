@@ -1,9 +1,8 @@
 import pandas as pd
 import yfinance as yf
 
-def fetch_stock_history(
-    ticker: str, start_date: str, end_date: str
-) -> pd.DataFrame:
+
+def fetch_stock_history(ticker: str, start_date: str, end_date: str) -> pd.DataFrame:
     """Coleta o histórico de preços de uma ação usando a biblioteca yfinance."""
     print(f"Buscando dados históricos para {ticker}...")
     try:
@@ -23,6 +22,7 @@ def fetch_stock_history(
     except Exception as e:
         print(f"Erro ao buscar dados técnicos: {e}")
         return pd.DataFrame()
+
 
 def calculate_technical_indicators(
     df: pd.DataFrame, rsi_period: int = 14
@@ -52,6 +52,7 @@ def calculate_technical_indicators(
 
     return df
 
+
 def fetch_fundamental_metrics(ticker: str) -> dict:
     """Extrai métricas fundamentais essenciais do ticker informado."""
     print(f"Buscando dados fundamentais para {ticker}...")
@@ -64,9 +65,7 @@ def fetch_fundamental_metrics(ticker: str) -> dict:
             "company_name": info.get("longName", ticker),
             "pe_ratio": info.get("trailingPE"),  # Preço / Lucro
             "forward_pe": info.get("forwardPE"),
-            "dividend_yield": info.get(
-                "dividendYield"
-            ),  # Ex: 0.02 = 2% ao ano
+            "dividend_yield": info.get("dividendYield"),  # Ex: 0.02 = 2% ao ano
             "price_to_book": info.get("priceToBook"),  # P/VP
             "market_cap": info.get("marketCap"),
             "sector": info.get("sector"),
@@ -80,6 +79,7 @@ def fetch_fundamental_metrics(ticker: str) -> dict:
     except Exception as e:
         print(f"Erro ao buscar dados fundamentais: {e}")
         return {}
+
 
 # --- Bloco de Teste Executável ---
 if __name__ == "__main__":
@@ -95,9 +95,7 @@ if __name__ == "__main__":
         df_indicators = calculate_technical_indicators(df_raw)
 
         print("\n=== Últimas 5 linhas dos dados técnicos ===")
-        print(
-            df_indicators[["Close", "SMA_50", "SMA_200", "RSI"]].tail().round(2)
-        )
+        print(df_indicators[["Close", "SMA_50", "SMA_200", "RSI"]].tail().round(2))
 
     # 2. Executa coleta fundamentalista
     dados_fundamentais = fetch_fundamental_metrics(TICKER_TESTE)
