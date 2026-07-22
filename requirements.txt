@@ -5,3 +5,4 @@ streamlit>=1.30.0
 plotly>=5.18.0
 black>=24.1.0
 flake8>=7.0.0
+lxml>=4.9.0

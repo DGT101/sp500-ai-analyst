@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 
@@ -30,19 +31,35 @@ st.caption(
 # ==========================================
 st.sidebar.header("Parâmetros da Análise")
 
-# Lista simplificada para o MVP. Futuramente pode vir de uma lista dinâmica ou CSV do S&P 500.
-SP500_TICKERS = [
-    "AAPL",
-    "MSFT",
-    "GOOGL",
-    "AMZN",
-    "META",
-    "NVDA",
-    "TSLA",
-    "BRK-B",
-    "JNJ",
-    "V",
-]
+
+# Lista dinâmica com todas as ações do S&P 500
+@st.cache_data(ttl=86400)  # Cache de 24 horas
+def get_sp500_tickers():
+    try:
+        url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+        # O Wikipedia pode bloquear urllib padrão, então passamos um User-Agent
+        tables = pd.read_html(url, storage_options={"User-Agent": "Mozilla/5.0"})
+        df = tables[0]
+        # Algumas ações na Wikipedia usam "." em vez de "-" (ex: BRK.B). O Yahoo Finance usa "-"
+        return [ticker.replace(".", "-") for ticker in df["Symbol"].tolist()]
+    except Exception as e:
+        st.error(f"Erro ao buscar lista do S&P 500: {e}")
+        # Retorna uma lista de segurança caso ocorra falha de rede
+        return [
+            "AAPL",
+            "MSFT",
+            "GOOGL",
+            "AMZN",
+            "META",
+            "NVDA",
+            "TSLA",
+            "BRK-B",
+            "JNJ",
+            "V",
+        ]
+
+
+SP500_TICKERS = get_sp500_tickers()
 ticker = st.sidebar.selectbox("Selecione o Ativo (S&P 500)", SP500_TICKERS)
 
 # Definição de datas pelo usuário
@@ -117,7 +134,8 @@ if submit_button:
                     )
                     metric_col2.metric("RSI (14)", f"{tech_dict['RSI']:.1f}")
                     metric_col3.metric(
-                        "Div. Yield", f"{fundamentals.get('dividend_yield') or 0.0:.2f}%"
+                        "Div. Yield",
+                        f"{fundamentals.get('dividend_yield') or 0.0:.2f}%",
                     )
 
                     # Gráfico Candlestick Interativo com Plotly
