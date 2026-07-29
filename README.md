@@ -32,6 +32,7 @@ O fluxo de dados do projeto segue uma pipeline dividida em três camadas princip
  - Dados Históricos Preço        - Prompt Ingestion               - Gráficos Interativos
  - Cálculo RSI e Mídias Móveis   - Alinhamento de Perfil          - Métricas Financeiras
  - Múltiplos Fundamentalistas    - Geração de Parecer Técnico     - Renderização Markdown
+```
 
 ---
 
