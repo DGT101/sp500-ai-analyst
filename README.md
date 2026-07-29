@@ -5,7 +5,7 @@
 ![Docker Supported](https://img.shields.io/badge/docker-supported-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-Uma plataforma inteligente de análise financeira baseada em dados que combina Engenharia de Dados clássica, Inteligência Artificial Analítica (Orquestração de LLMs via Groq) e práticas modernas de MLOps. O sistema coleta indicadores técnicos e fundamentalistas de ativos do S&P 500 em tempo real e gera relatórios personalizados com sugestões de alocação baseadas no perfil de risco do investidor.
+Uma plataforma inteligente de análise financeira baseada em dados que combina Engenharia de Dados clássica, Inteligência Artificial Analítica (Orquestração de LLMs via Groq) e práticas modernas de MLOps. O sistema coleta indicadores técnicos e fundamentalistas de ativos e fundos de índice do S&P 500 em tempo real e gera relatórios personalizados com sugestões de alocação baseadas no perfil de risco do investidor.
 
 ---
 
