@@ -59,8 +59,19 @@ def get_sp500_tickers():
         ]
 
 
-SP500_TICKERS = get_sp500_tickers()
-ticker = st.sidebar.selectbox("Selecione o Ativo (S&P 500)", SP500_TICKERS)
+asset_type = st.sidebar.radio("Tipo de Ativo", ["Ação Individual (S&P 500)", "ETF (Índice / Passivo)"])
+
+if asset_type == "Ação Individual (S&P 500)":
+    SP500_TICKERS = get_sp500_tickers()
+    ticker = st.sidebar.selectbox("Selecione a Ação", SP500_TICKERS)
+else:
+    # ETFs sugeridos para análise do S&P 500
+    ETF_TICKERS = ["SPY", "VOO", "IVVB11.SA"]
+    ticker = st.sidebar.selectbox(
+        "Selecione o ETF", 
+        ETF_TICKERS, 
+        help="SPY/VOO: Mercado Americano | IVVB11.SA: Mercado Brasileiro (B3)"
+    )
 
 # Definição de datas pelo usuário
 data_alvo = st.sidebar.date_input(
