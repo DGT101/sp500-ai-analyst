@@ -32,3 +32,64 @@ O fluxo de dados do projeto segue uma pipeline dividida em três camadas princip
  - Dados Históricos Preço        - Prompt Ingestion               - Gráficos Interativos
  - Cálculo RSI e Mídias Móveis   - Alinhamento de Perfil          - Métricas Financeiras
  - Múltiplos Fundamentalistas    - Geração de Parecer Técnico     - Renderização Markdown
+
+---
+
+## 🚀 Como Executar o Projeto Localmente
+
+Siga os passos abaixo para replicar e rodar este projeto na sua própria máquina.
+
+### 1. Pré-requisitos
+* **Git** instalado.
+* Conta na [Groq](https://console.groq.com/) para gerar uma API Key gratuita.
+* **Opção A:** Docker e Docker Compose instalados.
+* **Opção B:** Python 3.11+ instalado.
+
+### 2. Clonando o Repositório
+```bash
+git clone https://github.com/DGT101/sp500-ai-analyst.git
+cd sp500-ai-analyst
+```
+
+### 3. Configurando as Variáveis de Ambiente
+Crie um arquivo `.env` na raiz do projeto e adicione sua chave de API do Groq:
+```env
+GROQ_API_KEY=sua_chave_api_aqui
+```
+
+### 4. Executando a Aplicação
+
+Escolha uma das opções abaixo para rodar a aplicação:
+
+#### Opção A: Usando Docker (Recomendado)
+Com o Docker e Docker Compose instalados, execute o seguinte comando na raiz do projeto:
+```bash
+docker-compose up --build -d
+```
+A aplicação estará disponível em [http://localhost:8501](http://localhost:8501). 
+Para parar a aplicação, execute `docker-compose down`.
+
+#### Opção B: Rodando Localmente (Python Venv)
+Caso prefira rodar sem Docker, siga os passos para ambiente virtual:
+
+1. **Crie e ative um ambiente virtual:**
+   ```bash
+   python -m venv .venv
+   
+   # No Windows:
+   .venv\Scripts\activate
+   
+   # No Linux/Mac:
+   source .venv/bin/activate
+   ```
+
+2. **Instale as dependências:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Inicie o aplicativo:**
+   ```bash
+   streamlit run src/app.py
+   ```
+A interface do Streamlit abrirá automaticamente no seu navegador padrão, também disponível em [http://localhost:8501](http://localhost:8501).
